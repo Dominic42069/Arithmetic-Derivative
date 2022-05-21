@@ -12,6 +12,7 @@ with the following properties:
 $$
 D(0) \hspace{0.5em} = \hspace{0.5em}D(1) \hspace{0.5em} = \hspace{0.5em} 0
 $$
+
 $$
 D(p) \hspace{0.5em} = \hspace{0.5em} 1, \hspace{0.5em} p \hspace{0.5em} \text{is prime.}\newline
 D(mn) \hspace{0.5em} = \hspace{0.5em} D(m)n \hspace{0.5em} + \hspace{0.5em} mD(n)\newline

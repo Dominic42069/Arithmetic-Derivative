@@ -1,15 +1,18 @@
 from numbers import Number
 from numpy import sqrt
+from sqlalchemy import Float
 
 class PrimeFactoredInteger:
     def primefactorise(self):
         n = self.abs_n
+        if n == 0:
+            return [(0, 1)]
         primes = []
         powers = []
         while n % 2 == 0:
             primes.append(2)
             n /= 2
-        for k in range(3, int(sqrt(self.abs_n))+1, 2):
+        for k in range(3, self.abs_n+1, 2):
             while n % k == 0:
                 primes.append(k)
                 n /= k
@@ -57,6 +60,9 @@ class PrimeFactoredInteger:
     def __rmul__(self, other):
         return other*self.abs_n
 
+    def __pow__(self, other):
+        return self.abs_n**other
+
 
 class IntegerWithDerivative(PrimeFactoredInteger):
     def __init__(self, n):
@@ -77,6 +83,14 @@ class IntegerWithDerivative(PrimeFactoredInteger):
                 nfac.append(end_factor)
                 n = IntegerWithDerivative(nfac)
                 m = IntegerWithDerivative(self.factorisation)
-                nder = n.derivative()
-                mder = m.derivative()
-                return mder*n + m*nder
+                return m.derivative()*n + m*n.derivative()
+
+
+class RationalWithDerivative(IntegerWithDerivative):
+    def __init__(self, n):
+        self.num, self.den = n.as_integer_ratio()
+        self.num = IntegerWithDerivative(self.num)
+        self.den = IntegerWithDerivative(self.den)
+
+    def derivative(self):
+        return (self.num.derivative()*self.den - self.num*self.den.derivative())/((self.den)**2)

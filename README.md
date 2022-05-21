@@ -28,5 +28,5 @@ $$
 For rational numbers:
 
 $$
-D(m/n) \hspace{0.5em} = \hspace{0.5em} (D(m)n - mD(n))/n^2
+D(\frac{m}{n}) \hspace{0.5em} = \hspace{0.5em} \frac{D(m)n - mD(n)}{n^2}
 $$
